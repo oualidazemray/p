@@ -4,7 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BackgroundEffect from "@/components/BackgroundEffect"; // ✅
+import BackgroundEffect from "@/components/BackgroundEffect";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,13 +25,14 @@ export default function RootLayout({
       <body
         className={`${poppins.className} bg-[#0B0E1A] text-slate-100 antialiased`}
       >
-        {/* ✅ Client-side animated background */}
         <BackgroundEffect />
 
-        {/* Layout structure */}
-        <div className="relative z-10">
+        {/* Responsive container with padding */}
+        <div className="relative z-10 min-h-screen flex flex-col">
           <Header />
-          <main className="container mx-auto px-4">{children}</main>
+          <main className="flex-grow w-full px-4 sm:px-6 md:px-8 max-w-screen-xl mx-auto">
+            {children}
+          </main>
           <Footer />
         </div>
       </body>

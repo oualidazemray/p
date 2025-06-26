@@ -105,9 +105,24 @@ export const portfolioData = {
 
   experience: [
     {
+      role: "étudiant en Double Diplôme - Ingénierie des Systèmes Numériques",
+      company: "ENSEM Nancy - Université de Lorraine",
+      period: "2025 - 2027",
+      description:
+        "Formation d'excellence en systèmes numériques, incluant la modélisation, le traitement du signal, la robotique et les systèmes embarqués, dans le cadre d’un double diplôme avec l’ENSMR.",
+    },
+    {
+      role: "Stagiaire PFA – Plateforme IA de Microlearning",
+      company: "Bank Al-Maghrib",
+      period: "2025",
+      description:
+        "Conception et développement d’une plateforme digitale de formation continue exploitant le microlearning et des agents conversationnels intelligents. Intégration de technologies d’IA (traitement du langage naturel, systèmes de recommandation), architecture centrée utilisateur, développement full-stack, prototypage et amélioration continue via retours utilisateurs.",
+    },
+
+    {
       role: "Étudiant Ingénieur - Génie Informatique",
       company: "École Nationale Supérieure des Mines de Rabat",
-      period: "2023 - Présent",
+      period: "2023 - 2025",
       description:
         "Spécialisation en développement logiciel, architecture des systèmes et technologies de l'information.",
     },
@@ -119,7 +134,7 @@ export const portfolioData = {
         "Développement de l'interface utilisateur d'un site de gestion scolaire avec HTML, Tailwind CSS et React.js.",
     },
     {
-      role: "Classes Préparatoires (CPGE)",
+      role: "étudiant -Classes Préparatoires (CPGE)",
       company: "IBN BAJJA - Beni Mellal",
       period: "2021 - 2022",
       description:

@@ -8,7 +8,6 @@ import {
   FiMonitor,
   FiTool,
   FiCloud,
-  FiStar,
   FiCpu,
 } from "react-icons/fi";
 import { FaBrain } from "react-icons/fa6";
@@ -39,7 +38,6 @@ import {
   SiTensorflow,
 } from "react-icons/si";
 
-// Interface for typing our skill objects
 interface Skill {
   name: string;
   icon: React.ElementType;
@@ -48,63 +46,148 @@ interface Skill {
   description: string;
   projects: string[];
   color: string;
+  proficiency: number;
+  yearStarted: number;
 }
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [searchQuery] = useState("");
 
   const allSkills: Skill[] = [
     {
-      name: "Prisma",
-      icon: SiPrisma,
+      name: "Apache Maven",
+      icon: SiApachemaven,
       category: "tools",
       experience: "1+ an",
       description:
-        "ORM moderne pour TypeScript et Node.js, facilitant les requêtes avec autocomplétion et typage.",
-      projects: ["Bellavista", "ENIMSPORTS"],
-      color: "from-indigo-500 to-purple-500",
+        "Gestion de dépendances et automatisation de builds pour projets Java",
+      projects: ["GESTMARKET"],
+      color: "from-red-500 to-orange-600",
+      proficiency: 75,
+      yearStarted: 2022,
+    },
+    {
+      name: "Expo",
+      icon: SiExpo,
+      category: "web",
+      experience: "1+ an",
+      description: "Développement multiplateforme d'applications React Native",
+      projects: ["Application mobile"],
+      color: "from-gray-600 to-black",
+      proficiency: 70,
+      yearStarted: 2023,
+    },
+    {
+      name: "C",
+      icon: SiC,
+      category: "programming",
+      experience: "1+ an",
+      description: "Programmation système et développement bas niveau",
+      projects: ["Projets académiques"],
+      color: "from-blue-600 to-blue-800",
+      proficiency: 65,
+      yearStarted: 2021,
+    },
+    {
+      name: "Plotly",
+      icon: SiPlotly,
+      category: "ai_libs",
+      experience: "1+ an",
+      description: "Visualisation de données interactives et dashboards",
+      projects: ["Data Analysis"],
+      color: "from-purple-500 to-pink-500",
+      proficiency: 75,
+      yearStarted: 2022,
+    },
+    {
+      name: "Jira",
+      icon: SiJira,
+      category: "tools",
+      experience: "1+ an",
+      description: "Gestion de projets agile et suivi des tâches",
+      projects: ["Tous les projets"],
+      color: "from-blue-400 to-blue-600",
+      proficiency: 80,
+      yearStarted: 2022,
+    },
+    {
+      name: "C++",
+      icon: SiCplusplus,
+      category: "programming",
+      experience: "1+ an",
+      description: "Programmation orientée objet et algorithmes performants",
+      projects: ["Projets académiques"],
+      color: "from-blue-700 to-blue-900",
+      proficiency: 70,
+      yearStarted: 2021,
     },
     {
       name: "Supabase",
       icon: SiSupabase,
+      category: "database",
+      experience: "1+ an",
+      description: "Backend as a Service avec base de données temps réel",
+      projects: ["Bellavista"],
+      color: "from-green-500 to-green-700",
+      proficiency: 75,
+      yearStarted: 2023,
+    },
+    {
+      name: "HTML5",
+      icon: SiHtml5,
+      category: "web",
+      experience: "3+ ans",
+      description: "Sémantique HTML avancée et intégration web",
+      projects: ["Tous les projets web"],
+      color: "from-orange-500 to-orange-700",
+      proficiency: 90,
+      yearStarted: 2021,
+    },
+    {
+      name: "MongoDB",
+      icon: SiMongodb,
+      category: "database",
+      experience: "1+ an",
+      description: "Base de données NoSQL et modélisation de documents",
+      projects: ["SMART-POLES"],
+      color: "from-green-400 to-green-600",
+      proficiency: 75,
+      yearStarted: 2022,
+    },
+    {
+      name: "MySQL",
+      icon: SiMysql,
+      category: "database",
+      experience: "1+ an",
+      description: "Base de données relationnelle et optimisation SQL",
+      projects: ["GESTMARKET"],
+      color: "from-blue-500 to-blue-700",
+      proficiency: 78,
+      yearStarted: 2022,
+    },
+    {
+      name: "Linux",
+      icon: SiLinux,
+      category: "tools",
+      experience: "2+ ans",
+      description: "Administration système et scripting shell",
+      projects: ["Déploiements"],
+      color: "from-yellow-600 to-black",
+      proficiency: 80,
+      yearStarted: 2021,
+    },
+    {
+      name: "Figma",
+      icon: SiFigma,
       category: "tools",
       experience: "1+ an",
-      description:
-        "Backend as a Service open-source basé sur PostgreSQL, offrant authentification, stockage, et API temps réel.",
-      projects: ["Bellavista"],
-      color: "from-green-500 to-emerald-600",
-    },
-    {
-      name: "PostgreSQL",
-      icon: SiPostgresql,
-      category: "database",
-      experience: "1.5+ ans",
-      description:
-        "Système de gestion de base de données relationnelle robuste, puissant et open-source.",
-      projects: ["Bellavista", "ENIMSPORTS"],
-      color: "from-blue-700 to-cyan-700",
-    },
-
-    {
-      name: "Deep Learning",
-      icon: FaBrain,
-      category: "ai_ml",
-      experience: "2+ ans",
-      description:
-        "Réseaux de neurones, CNN, RNN, Transformers pour l'analyse d'images et de texte.",
-      projects: ["Computer Vision", "NLP Projects"],
-      color: "from-purple-400 to-pink-500",
-    },
-    {
-      name: "Machine Learning",
-      icon: FaBrain,
-      category: "ai_ml",
-      experience: "2+ ans",
-      description:
-        "Apprentissage supervisé/non-supervisé, optimisation et mise en production de modèles.",
-      projects: ["Predictive Analytics", "Classification Models"],
-      color: "from-blue-400 to-indigo-500",
+      description: "Design d'interface et prototypage",
+      projects: ["ENIMSPORTS", "Portfolio"],
+      color: "from-purple-400 to-pink-400",
+      proficiency: 70,
+      yearStarted: 2022,
     },
     {
       name: "NumPy",
@@ -112,39 +195,123 @@ const Skills = () => {
       category: "ai_libs",
       experience: "2+ ans",
       description:
-        "Calcul scientifique, manipulation de tableaux multidimensionnels et d'opérations mathématiques.",
-      projects: ["Tous les projets Data"],
-      color: "from-blue-400 to-cyan-400",
+        "Calcul scientifique et manipulation de tableaux multidimensionnels",
+      projects: ["Data Analysis", "ML Projects"],
+      color: "from-blue-400 to-blue-600",
+      proficiency: 85,
+      yearStarted: 2022,
     },
     {
       name: "Pandas",
       icon: SiPandas,
       category: "ai_libs",
       experience: "2+ ans",
-      description:
-        "Analyse et manipulation de données, structures de données (DataFrame) performantes.",
-      projects: ["Data Cleaning", "Data Analysis"],
-      color: "from-gray-500 to-blue-500",
+      description: "Manipulation et analyse de données",
+      projects: ["Data Analysis", "ML Projects"],
+      color: "from-red-400 to-red-600",
+      proficiency: 88,
+      yearStarted: 2022,
     },
     {
-      name: "Scikit-learn",
+      name: "scikit-learn",
       icon: SiScikitlearn,
       category: "ai_libs",
       experience: "2+ ans",
-      description:
-        "Bibliothèque complète pour le Machine Learning classique : classification, régression, clustering.",
-      projects: ["Predictive Models"],
-      color: "from-orange-400 to-orange-600",
+      description: "Algorithmes de machine learning traditionnels",
+      projects: ["Predictive Analytics"],
+      color: "from-orange-500 to-orange-700",
+      proficiency: 85,
+      yearStarted: 2022,
     },
     {
-      name: "TensorFlow/PyTorch",
-      icon: SiTensorflow,
-      category: "ai_libs",
-      experience: "1.5+ ans",
+      name: "Code",
+      icon: FiCode,
+      category: "tools",
+      experience: "3+ ans",
+      description: "Développement logiciel et bonnes pratiques",
+      projects: ["Tous les projets"],
+      color: "from-gray-500 to-gray-700",
+      proficiency: 90,
+      yearStarted: 2021,
+    },
+    {
+      name: "Database",
+      icon: FiDatabase,
+      category: "database",
+      experience: "2+ ans",
+      description: "Conception et optimisation de bases de données",
+      projects: ["Tous les projets"],
+      color: "from-blue-300 to-blue-500",
+      proficiency: 85,
+      yearStarted: 2022,
+    },
+    {
+      name: "Monitor",
+      icon: FiMonitor,
+      category: "tools",
+      experience: "2+ ans",
+      description: "Développement frontend et UI/UX",
+      projects: ["Tous les projets web"],
+      color: "from-indigo-400 to-indigo-600",
+      proficiency: 80,
+      yearStarted: 2022,
+    },
+    {
+      name: "Tool",
+      icon: FiTool,
+      category: "tools",
+      experience: "3+ ans",
+      description: "Automatisation et outils de développement",
+      projects: ["Tous les projets"],
+      color: "from-gray-600 to-gray-800",
+      proficiency: 85,
+      yearStarted: 2021,
+    },
+    {
+      name: "Cloud",
+      icon: FiCloud,
+      category: "tools",
+      experience: "1+ an",
+      description: "Déploiement et infrastructure cloud",
+      projects: ["ENIMSPORTS"],
+      color: "from-blue-300 to-blue-500",
+      proficiency: 70,
+      yearStarted: 2023,
+    },
+    {
+      name: "CPU",
+      icon: FiCpu,
+      category: "tools",
+      experience: "3+ ans",
+      description: "Optimisation des performances et algorithmes efficaces",
+      projects: ["Tous les projets"],
+      color: "from-purple-400 to-purple-600",
+      proficiency: 80,
+      yearStarted: 2021,
+    },
+    {
+      name: "Deep Learning",
+      icon: FaBrain,
+      category: "ai_ml",
+      experience: "2+ ans",
       description:
-        "Frameworks de Deep Learning pour la création et l'entraînement de réseaux de neurones.",
-      projects: ["Image Recognition", "NLP"],
-      color: "from-orange-500 to-yellow-500",
+        "Architectures avancées de réseaux de neurones, optimisation et déploiement de modèles complexes",
+      projects: ["Computer Vision", "NLP Projects"],
+      color: "from-purple-400 to-pink-500",
+      proficiency: 85,
+      yearStarted: 2022,
+    },
+    {
+      name: "Machine Learning",
+      icon: FaBrain,
+      category: "ai_ml",
+      experience: "2+ ans",
+      description:
+        "Conception et implémentation d'algorithmes ML, feature engineering, et MLOps",
+      projects: ["Predictive Analytics", "Classification Models"],
+      color: "from-blue-400 to-indigo-500",
+      proficiency: 90,
+      yearStarted: 2022,
     },
     {
       name: "Python",
@@ -152,89 +319,11 @@ const Skills = () => {
       category: "programming",
       experience: "3+ ans",
       description:
-        "Développement backend, scripts d'automatisation, et pilier de la data science.",
+        "Développement full-stack, automatisation, data science et architecture de microservices",
       projects: ["E-MADARIS", "SMART-POLES"],
       color: "from-blue-400 to-yellow-500",
-    },
-    {
-      name: "Java",
-      icon: FaJava,
-      category: "programming",
-      experience: "2+ ans",
-      description:
-        "Applications d'entreprise robustes, développement Android et applications desktop.",
-      projects: ["GESTMARKET"],
-      color: "from-orange-500 to-red-500",
-    },
-    {
-      name: "JavaScript",
-      icon: SiJavascript,
-      category: "programming",
-      experience: "2+ ans",
-      description:
-        "Langage essentiel du web pour créer des applications interactives et dynamiques.",
-      projects: ["ENIMSPORTS", "Portfolio"],
-      color: "from-yellow-400 to-yellow-500",
-    },
-    {
-      name: "Maven",
-      icon: SiApachemaven,
-      category: "tools",
-      experience: "1+ an",
-      description:
-        "Outil de gestion de projets Java, gestion des dépendances et du cycle de vie de build.",
-      projects: ["GESTMARKET"],
-      color: "from-red-500 to-gray-700",
-    },
-    {
-      name: "MATLAB",
-      icon: FiCpu,
-      category: "programming",
-      experience: "1+ an",
-      description:
-        "Calcul scientifique, traitement du signal, et modélisation mathématique.",
-      projects: ["Analyse numérique"],
-      color: "from-yellow-400 to-red-400",
-    },
-    {
-      name: "Expo / React Native",
-      icon: SiExpo,
-      category: "web",
-      experience: "1+ an",
-      description:
-        "Développement d'applications mobiles multiplateformes avec React Native et Expo.",
-      projects: ["Prototypes mobiles"],
-      color: "from-black to-gray-600",
-    },
-    {
-      name: "JTK (C)",
-      icon: SiC,
-      category: "programming",
-      experience: "1 an",
-      description:
-        "Bibliothèque pour le développement d'interfaces graphiques en C.",
-      projects: ["Interfaces bas niveau"],
-      color: "from-gray-700 to-blue-500",
-    },
-    {
-      name: "Matplotlib",
-      icon: SiPlotly, // SiMatplotlib doesn't exist, Plotly is closest
-      category: "ai_libs",
-      experience: "2+ ans",
-      description:
-        "Visualisation de données en Python : courbes, histogrammes, et plus.",
-      projects: ["Data Visualization"],
-      color: "from-pink-400 to-purple-500",
-    },
-    {
-      name: "Jira",
-      icon: SiJira,
-      category: "tools",
-      experience: "1+ an",
-      description:
-        "Outil de gestion de projet agile pour le suivi des tâches, sprints et bugs.",
-      projects: ["Suivi d'équipe"],
-      color: "from-blue-500 to-indigo-500",
+      proficiency: 95,
+      yearStarted: 2021,
     },
     {
       name: "TypeScript",
@@ -242,19 +331,11 @@ const Skills = () => {
       category: "programming",
       experience: "1.5+ ans",
       description:
-        "JavaScript typé pour des applications à grande échelle, plus robustes et maintenables.",
+        "Applications enterprise-grade avec typage strict et patterns de conception avancés",
       projects: ["ENIMSPORTS"],
       color: "from-blue-500 to-blue-700",
-    },
-    {
-      name: "C/C++",
-      icon: SiCplusplus,
-      category: "programming",
-      experience: "1+ an",
-      description:
-        "Programmation système, algorithmes performants et applications bas niveau.",
-      projects: ["8 Reines Solver"],
-      color: "from-gray-500 to-blue-600",
+      proficiency: 88,
+      yearStarted: 2022,
     },
     {
       name: "React",
@@ -262,9 +343,11 @@ const Skills = () => {
       category: "web",
       experience: "2+ ans",
       description:
-        "Bibliothèque UI pour construire des interfaces utilisateur réactives avec des composants.",
+        "Architectures complexes, state management, performance optimization et patterns avancés",
       projects: ["E-MADARIS", "Portfolio"],
       color: "from-cyan-400 to-blue-500",
+      proficiency: 92,
+      yearStarted: 2022,
     },
     {
       name: "Next.js",
@@ -272,49 +355,71 @@ const Skills = () => {
       category: "web",
       experience: "1.5+ ans",
       description:
-        "Framework React pour la production avec rendu côté serveur (SSR) et génération statique (SSG).",
+        "Applications full-stack avec SSR/SSG, optimisation SEO et déploiement edge",
       projects: ["ENIMSPORTS"],
       color: "from-black to-gray-700",
+      proficiency: 85,
+      yearStarted: 2022,
     },
     {
-      name: "HTML5/CSS3",
-      icon: SiHtml5,
-      category: "web",
-      experience: "3+ ans",
+      name: "PostgreSQL",
+      icon: SiPostgresql,
+      category: "database",
+      experience: "1.5+ ans",
       description:
-        "Fondations du web pour la structure sémantique et le design moderne et responsive.",
-      projects: ["Tous les projets web"],
-      color: "from-orange-500 to-pink-500",
+        "Conception de schémas complexes, optimisation de requêtes et administration avancée",
+      projects: ["Bellavista", "ENIMSPORTS"],
+      color: "from-blue-700 to-cyan-700",
+      proficiency: 82,
+      yearStarted: 2022,
     },
     {
-      name: "MongoDB",
-      icon: SiMongodb,
+      name: "Java",
+      icon: FaJava,
+      category: "programming",
+      experience: "2+ ans",
+      description:
+        "Applications enterprise, design patterns et architecture distribuée",
+      projects: ["GESTMARKET"],
+      color: "from-orange-500 to-red-500",
+      proficiency: 80,
+      yearStarted: 2022,
+    },
+    {
+      name: "JavaScript",
+      icon: SiJavascript,
+      category: "programming",
+      experience: "2+ ans",
+      description:
+        "ES6+, async programming, DOM manipulation et optimisation performance",
+      projects: ["ENIMSPORTS", "Portfolio"],
+      color: "from-yellow-400 to-yellow-500",
+      proficiency: 90,
+      yearStarted: 2022,
+    },
+    {
+      name: "TensorFlow",
+      icon: SiTensorflow,
+      category: "ai_libs",
+      experience: "1.5+ ans",
+      description:
+        "Deep learning pipelines, model deployment et production ML systems",
+      projects: ["Image Recognition", "NLP"],
+      color: "from-orange-500 to-yellow-500",
+      proficiency: 78,
+      yearStarted: 2022,
+    },
+    {
+      name: "Prisma",
+      icon: SiPrisma,
       category: "database",
       experience: "1+ an",
       description:
-        "Base de données NoSQL orientée document, flexible et scalable pour les applications modernes.",
-      projects: ["ENIMSPORTS"],
-      color: "from-green-400 to-green-600",
-    },
-    {
-      name: "SQL (MySQL)",
-      icon: SiMysql,
-      category: "database",
-      experience: "2+ ans",
-      description:
-        "Langage de requêtes pour bases de données relationnelles, garantissant la cohérence des données.",
-      projects: ["GESTMARKET"],
-      color: "from-blue-500 to-orange-400",
-    },
-    {
-      name: "Linux",
-      icon: SiLinux,
-      category: "tools",
-      experience: "2+ ans",
-      description:
-        "Administration système, ligne de commande, et environnement de développement principal.",
-      projects: ["Développement général"],
-      color: "from-yellow-400 to-gray-400",
+        "ORM moderne avec migrations avancées et optimisation de requêtes",
+      projects: ["Bellavista", "ENIMSPORTS"],
+      color: "from-indigo-500 to-purple-500",
+      proficiency: 85,
+      yearStarted: 2023,
     },
     {
       name: "Git",
@@ -322,236 +427,255 @@ const Skills = () => {
       category: "tools",
       experience: "3+ ans",
       description:
-        "Système de contrôle de version essentiel pour la collaboration et le suivi des projets.",
+        "Workflows avancés, Git hooks, monorepo management et CI/CD integration",
       projects: ["Tous les projets"],
       color: "from-red-500 to-orange-500",
-    },
-    {
-      name: "Figma",
-      icon: SiFigma,
-      category: "tools",
-      experience: "1.5+ ans",
-      description:
-        "Outil de design collaboratif pour la création d'interfaces UI/UX et de prototypes.",
-      projects: ["Design des interfaces"],
-      color: "from-purple-400 to-pink-500",
-    },
-    {
-      name: "Cloud",
-      icon: FiCloud,
-      category: "tools",
-      experience: "1+ an",
-      description:
-        "Déploiement et gestion d'applications sur des plateformes comme Vercel, AWS, Azure.",
-      projects: ["Hébergement projets"],
-      color: "from-sky-400 to-blue-500",
+      proficiency: 95,
+      yearStarted: 2021,
     },
   ];
 
   const categories = [
-    { id: "all", name: "Toutes", icon: FiStar },
-    { id: "ai_ml", name: "Concepts AI", icon: FaBrain },
-    { id: "ai_libs", name: "Bibliothèques AI", icon: FiCode },
-    { id: "programming", name: "Programmation", icon: FiCode },
-    { id: "web", name: "Web", icon: FiMonitor },
-    { id: "database", name: "Base de données", icon: FiDatabase },
-    { id: "tools", name: "Outils", icon: FiTool },
+    { id: "all", name: "Toutes Technologies", icon: FiCode },
+    { id: "ai_ml", name: "Intelligence Artificielle", icon: FaBrain },
+    { id: "ai_libs", name: "Frameworks ML", icon: FiCpu },
+    { id: "programming", name: "Langages", icon: FiCode },
+    { id: "web", name: "Développement Web", icon: FiMonitor },
+    { id: "database", name: "Bases de Données", icon: FiDatabase },
+    { id: "tools", name: "DevOps & Outils", icon: FiTool },
   ];
 
-  const filteredSkills =
-    activeCategory === "all"
-      ? allSkills
-      : allSkills.filter((skill) => skill.category === activeCategory);
+  const filteredSkills = allSkills.filter((skill) => {
+    const matchesCategory =
+      selectedCategory === "all" || skill.category === selectedCategory;
+    const matchesSearch =
+      skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      skill.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const getExperienceColor = (proficiency: number) => {
+    if (proficiency >= 90) return "text-emerald-400";
+    if (proficiency >= 80) return "text-blue-400";
+    if (proficiency >= 70) return "text-yellow-400";
+    return "text-orange-400";
+  };
+
+  const getExperienceLevel = (proficiency: number) => {
+    if (proficiency >= 90) return "Expert";
+    if (proficiency >= 80) return "Avancé";
+    if (proficiency >= 70) return "Intermédiaire";
+    return "Débutant";
+  };
 
   return (
-    <section id="skills" className="py-24 relative overflow-x-clip">
-      <motion.div
-        className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{
-          scaleX: 1,
-          opacity: [0, 0.8, 0],
-          transition: { duration: 2.5, times: [0, 0.5, 1] },
-        }}
-        viewport={{ once: false, amount: 0.3 }}
-      />
-      <motion.div
-        className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500 to-transparent"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{
-          scaleX: 1,
-          opacity: [0, 0.8, 0],
-          transition: { duration: 2.5, times: [0, 0.5, 1] },
-        }}
-        viewport={{ once: false, amount: 0.3 }}
-      />
+    <section id="skills" className="py-24 relative min-h-screen ">
+      {/* Animated Background Grid */}
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-blue-400/70 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+            }}
+          />
+        ))}
+      </div>
 
-      <div className="relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header Section */}
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: -20 }}
+          className="text-center mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Showcase d
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
-              Expertise
-            </span>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+            Expertise Technique
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Un aperçu des technologies et outils que je maîtrise pour construire
-            des solutions innovantes.
+          <p className="text-base md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed px-4">
+            Technologies maîtrisées et architectures développées au cours de mon
+            parcours de développement
           </p>
         </motion.div>
 
-        <div className="flex justify-center mb-12">
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 p-2 bg-slate-800/50 rounded-full border border-slate-700/50">
+        {/* Search and Filter Bar */}
+        <motion.div
+          className="mb-12 flex flex-col gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start">
             {categories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`relative flex items-center space-x-2 px-4 py-2 text-sm md:px-6 md:py-3 md:text-base rounded-full transition-colors duration-300 focus:outline-none ${
-                  activeCategory === category.id
-                    ? "text-white"
-                    : "text-slate-300 hover:text-white"
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-3 py-2 md:px-6 rounded-full text-xs md:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                  selectedCategory === category.id
+                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/25"
+                    : "bg-slate-800/50 text-slate-300 hover:bg-slate-700/50 hover:text-white border border-slate-700"
                 }`}
               >
-                {activeCategory === category.id && (
-                  <motion.div
-                    layoutId="active-category-pill"
-                    className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">
-                  <category.icon />
-                </span>
-                <span className="relative z-10 font-medium">
-                  {category.name}
-                </span>
+                {category.name}
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
+        {/* Skills Timeline/Grid Hybrid */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeCategory}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
-            }}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            key={selectedCategory + searchQuery}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-4"
           >
-            {filteredSkills.map((skill) => {
-              // --- THIS IS THE FIX ---
-              // We create a capitalized variable for the icon component.
-              // And we add a safety check.
+            {filteredSkills.map((skill, index) => {
               const Icon = skill.icon;
-              if (!Icon) return null;
-
               return (
                 <motion.div
                   key={skill.name}
-                  variants={{
-                    hidden: { opacity: 0, scale: 0.9 },
-                    visible: { opacity: 1, scale: 1 },
-                  }}
-                  className="group relative p-6 rounded-xl bg-slate-900/50 border border-slate-700/50 overflow-hidden cursor-pointer bg-[image:radial-gradient(ellipse_at_top_left,rgba(59,130,246,0.15),transparent_50%)] hover:border-blue-500/80 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
-                  onClick={() => setSelectedSkill(skill)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative"
+                  onMouseEnter={() => setHoveredSkill(skill.name)}
+                  onMouseLeave={() => setHoveredSkill(null)}
                 >
-                  <div className="relative z-10">
-                    <Icon className="text-5xl text-slate-400 group-hover:text-blue-400 transition-colors duration-300" />
-                    <h3 className="mt-4 text-lg font-bold text-slate-200">
-                      {skill.name}
-                    </h3>
-                    <p className="mt-1 text-sm text-slate-400 line-clamp-2 h-10">
-                      {skill.description}
-                    </p>
-                    <div className="mt-4 border-t border-slate-700/50 pt-3">
-                      <span className="text-xs font-semibold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full">
-                        {skill.experience} d expérience
-                      </span>
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8 p-4 md:p-6 rounded-2xl bg-gradient-to-r from-slate-900/50 to-slate-800/30 border border-slate-700/50 hover:border-blue-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10">
+                    {/* Icon and Name */}
+                    <div className="flex items-start gap-4 lg:gap-6 min-w-0 flex-1">
+                      <div
+                        className={`w-12 h-12 md:w-16 md:h-16 rounded-xl bg-gradient-to-r ${skill.color} p-0.5 flex-shrink-0`}
+                      >
+                        <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
+                          <Icon className="text-lg md:text-2xl text-white" />
+                        </div>
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-lg md:text-2xl font-bold text-white mb-1">
+                          {skill.name}
+                        </h3>
+                        <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+                          {skill.description}
+                        </p>
+
+                        {/* Projects Tags */}
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          {skill.projects.map((project, idx) => (
+                            <span
+                              key={idx}
+                              className="px-2 py-1 md:px-3 text-xs font-medium bg-blue-500/10 text-blue-300 rounded-full border border-blue-500/20"
+                            >
+                              {project}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Experience Metrics */}
+                    <div className="flex flex-row lg:flex-col items-center lg:items-end justify-between lg:justify-center gap-4 flex-shrink-0 lg:w-40">
+                      <div className="text-left lg:text-right">
+                        <div
+                          className={`text-base md:text-lg font-bold ${getExperienceColor(
+                            skill.proficiency
+                          )}`}
+                        >
+                          {getExperienceLevel(skill.proficiency)}
+                        </div>
+                        <div className="text-slate-400 text-xs md:text-sm">
+                          {skill.experience}
+                        </div>
+                        <div className="text-slate-400 text-xs md:text-sm lg:mt-2">
+                          Depuis {skill.yearStarted}
+                        </div>
+                      </div>
+
+                      {/* Proficiency Bar */}
+                      <div className="w-24 lg:w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
+                        <motion.div
+                          className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
+                          initial={{ width: 0 }}
+                          animate={{ width: `${skill.proficiency}%` }}
+                          transition={{ duration: 1, delay: index * 0.1 }}
+                        />
+                      </div>
                     </div>
                   </div>
+
+                  {/* Hover Effect Overlay */}
+                  <AnimatePresence>
+                    {hoveredSkill === skill.name && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 rounded-2xl pointer-events-none"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               );
             })}
           </motion.div>
         </AnimatePresence>
-      </div>
 
-      <AnimatePresence>
-        {selectedSkill && (
-          <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedSkill(null)}
-          >
-            <motion.div
-              className="bg-slate-800 rounded-2xl p-6 md:p-8 max-w-md w-full border border-slate-700 shadow-2xl shadow-blue-500/10"
-              variants={{
-                hidden: { scale: 0.9, opacity: 0 },
-                visible: {
-                  scale: 1,
-                  opacity: 1,
-                  transition: { type: "spring", stiffness: 300, damping: 25 },
-                },
-                exit: { scale: 0.9, opacity: 0 },
-              }}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4">
-                  <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-r ${selectedSkill.color} flex items-center justify-center`}
-                  >
-                    <selectedSkill.icon className="text-white text-2xl" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold">{selectedSkill.name}</h3>
-                    <p className="text-slate-400">
-                      {selectedSkill.experience} d'expérience
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setSelectedSkill(null)}
-                  className="text-slate-400 hover:text-white text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-              <p className="text-slate-300 mb-6">{selectedSkill.description}</p>
-              <div>
-                <h4 className="font-semibold mb-3">
-                  Projets réalisés avec cette technologie
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedSkill.projects.map((project, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm"
-                    >
-                      {project}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Summary Stats */}
+        <motion.div
+          className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="text-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-2">
+              {allSkills.length}
+            </div>
+            <div className="text-sm md:text-base text-slate-300">
+              Technologies Maîtrisées
+            </div>
+          </div>
+
+          <div className="text-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-emerald-400 mb-2">
+              {allSkills.filter((s) => s.proficiency >= 90).length}
+            </div>
+            <div className="text-sm md:text-base text-slate-300">
+              Expertises Avancées
+            </div>
+          </div>
+
+          <div className="text-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-900/50 to-slate-800/30 border border-slate-700/50">
+            <div className="text-2xl md:text-3xl font-bold text-purple-400 mb-2">
+              3+
+            </div>
+            <div className="text-sm md:text-base text-slate-300">
+              Années d Expérience
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

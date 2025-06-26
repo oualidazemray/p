@@ -48,15 +48,6 @@ const Hero = () => {
     },
   };
 
-  // Code snippet floating elements
-  const codeSnippets = [
-    "const developer = 'passionate';",
-    "function solve() { return innovation; }",
-    "git commit -m 'building the future'",
-    "npm run create-magic",
-    "SELECT * FROM opportunities;",
-  ];
-
   return (
     <section
       id="home"
@@ -139,7 +130,7 @@ const Hero = () => {
         >
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-400">2+</div>
-            <div className="text-xs text-slate-400">Années d'études</div>
+            <div className="text-xs text-slate-400">Années d études</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-cyan-400">10+</div>

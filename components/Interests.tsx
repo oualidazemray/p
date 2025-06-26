@@ -17,7 +17,7 @@ const Interests = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-2">
           Centres{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-            d'Intérêt
+            d ntérêt
           </span>
         </h2>
         <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto"></div>
