@@ -10,11 +10,16 @@ const codeSnippets = [
   "export default class Engineer extends Human {}",
 ];
 
+// ✅ Fixed variant: ease is now a valid type
 const particleVariants = {
   animate: {
     opacity: [0, 1, 0],
     y: [0, -10, 0],
-    transition: { repeat: Infinity, duration: 6, ease: "easeInOut" },
+    transition: {
+      repeat: Infinity,
+      duration: 6,
+      ease: "easeInOut" as const, // ✅ use correct easing type
+    },
   },
 };
 
@@ -60,7 +65,6 @@ export default function BackgroundEffect() {
           }}
           variants={particleVariants}
           animate="animate"
-          transition={{ delay: index * 0.5 }}
         >
           {snippet}
         </motion.div>
@@ -70,7 +74,7 @@ export default function BackgroundEffect() {
       <motion.div
         className="absolute top-20 right-20 w-4 h-4 border border-blue-400/30"
         animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" as const }}
       />
       <motion.div
         className="absolute bottom-32 left-20 w-6 h-6 border border-cyan-400/30 rounded-full"
