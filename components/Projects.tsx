@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, easeOut } from "framer-motion";
 import Image from "next/image";
+
 import {
   FiExternalLink,
   FiGithub,
@@ -14,7 +15,10 @@ import {
 interface Project {
   title: string;
   description: string;
-  tags: { name: string; icon?: React.ComponentType }[];
+  tags: {
+    name: string;
+    icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  }[];
   githubLink: string;
   liveLink: string;
   images: { url: string; caption?: string }[];
@@ -152,7 +156,7 @@ const Projects = () => {
       transition: {
         delay: i * 0.1,
         duration: 0.6,
-        ease: "easeOut",
+        ease: easeOut,
       },
     }),
   };
@@ -194,11 +198,13 @@ const Projects = () => {
               <div className="relative mb-6 rounded-xl overflow-hidden h-48 bg-slate-900/50">
                 {project.images.length > 0 ? (
                   <>
-                    <img
+                    <Image
                       src={project.images[0].url}
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      priority={index < 3}
                     />
                     {/* Gallery Button */}
                     {project.images.length > 1 && (
@@ -324,10 +330,18 @@ const Projects = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: photoIndex * 0.1 }}
                       >
-                        <img
+                        <Image
                           src={photo.url}
                           alt={photo.caption || `Screenshot ${photoIndex + 1}`}
-                          className="w-full h-auto object-cover aspect-video"
+                          fill
+                          className="object-cover aspect-video"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            position: "relative",
+                          }}
+                          priority={photoIndex === 0}
                         />
                         {photo.caption && (
                           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">

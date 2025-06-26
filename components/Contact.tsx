@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { portfolioData } from "@/data";
 import { motion } from "framer-motion";
 import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 

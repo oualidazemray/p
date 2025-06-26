@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaJava } from "react-icons/fa";
 import {
   FiCode,
   FiDatabase,
@@ -8,17 +9,16 @@ import {
   FiTool,
   FiCloud,
   FiStar,
+  FiCpu,
 } from "react-icons/fi";
 import { FaBrain } from "react-icons/fa6";
 import {
   SiApachemaven,
-  SiMathworks,
   SiExpo,
   SiC,
   SiPlotly,
   SiJira,
   SiPython,
-  SiJava,
   SiJavascript,
   SiTypescript,
   SiCplusplus,
@@ -28,7 +28,6 @@ import {
   SiPostgresql,
   SiNextdotjs,
   SiHtml5,
-  SiCss3,
   SiMongodb,
   SiMysql,
   SiLinux,
@@ -159,7 +158,7 @@ const Skills = () => {
     },
     {
       name: "Java",
-      icon: SiJava,
+      icon: FaJava,
       category: "programming",
       experience: "2+ ans",
       description:
@@ -189,7 +188,7 @@ const Skills = () => {
     },
     {
       name: "MATLAB",
-      icon: SiMathworks,
+      icon: FiCpu,
       category: "programming",
       experience: "1+ an",
       description:
@@ -396,7 +395,7 @@ const Skills = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Showcase d'
+            Showcase d
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
               Expertise
             </span>
@@ -476,7 +475,7 @@ const Skills = () => {
                     </p>
                     <div className="mt-4 border-t border-slate-700/50 pt-3">
                       <span className="text-xs font-semibold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full">
-                        {skill.experience} d'expérience
+                        {skill.experience} d expérience
                       </span>
                     </div>
                   </div>

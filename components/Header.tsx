@@ -55,7 +55,7 @@ const Header = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-3 xl:space-x-6">
-          {navLinks.map((link, idx) => (
+          {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}

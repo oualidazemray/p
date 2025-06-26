@@ -5,8 +5,6 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiMongodb,
-  SiNodedotjs,
-  SiJava,
   SiPython,
   SiCplusplus,
   SiLinux,
@@ -15,7 +13,6 @@ import {
   SiDocker,
   SiJavascript,
   SiHtml5,
-  SiCss3,
 } from "react-icons/si";
 import {
   FaJava,
@@ -86,8 +83,8 @@ export const portfolioData = {
         "Conception d'une application desktop pour la gestion de supermarchés (stocks, ventes, achats) avec une interface graphique riche.",
       tags: [
         { name: "JavaFX", icon: FaJava },
-        { name: "Maven", icon: SiJava },
-        { name: "FXML", icon: SiJava },
+        { name: "Maven", icon: FaJava },
+        { name: "FXML", icon: FaJava },
       ],
       githubLink: "https://github.com/your-username/gestmarket", // Replace with your link
       liveLink: "#", // Desktop apps usually don't have a live link
